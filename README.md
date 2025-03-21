@@ -6,9 +6,9 @@ Este proyecto contiene una serie de funciones que manipulan datos sobre películ
 
 ## Tecnologías Utilizadas
 
-✅ JavaScript (ES6+): Uso de métodos modernos como map, reduce, filter y sort.
-✅ HTML5 y CSS3: Estructura semántica y diseño adaptable.
-✅ Node.js y npm: Para la gestión de dependencias y ejecución de tests.
+- ✅ JavaScript (ES6+): Uso de métodos modernos como map, reduce, filter y sort.
+- ✅ HTML5 y CSS3: Estructura semántica y diseño adaptable.
+- ✅ Node.js y npm: Para la gestión de dependencias y ejecución de tests.
 
 Instalación y Ejecución
 
