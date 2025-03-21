@@ -1,0 +1,1151 @@
+<html><head><meta charset="utf-8"/><title>Test Solution</title><style type="text/css">html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+body {
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/** SUMMARY */
+#summary {
+  color: #333;
+  margin: 2rem 0;
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 2rem;
+  background: #eee;
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: #4f8a10;
+  border-left: 0.4rem solid #4f8a10;
+  padding-left: 0.5rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: #d8000c;
+  border-left: 0.4rem solid #d8000c;
+  padding-left: 0.5rem;
+}
+.summary-pending {
+  color: #9f6000;
+  border-left: 0.4rem solid #9f6000;
+  padding-left: 0.5rem;
+}
+.summary-empty {
+  color: #999;
+  border-left: 0.4rem solid #999;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: #dff2bf;
+  color: #4f8a10;
+}
+.test-result.failed {
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.test-result.pending {
+  background-color: #ffdf61;
+  color: #9f6000;
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed #d8000c;
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 2rem;
+}
+.suite-container > input[type="checkbox"] {
+  position: absolute;
+  left: -100vw;
+}
+.suite-container label {
+  display: block;
+}
+.suite-container .suite-tests {
+  overflow-y: hidden;
+  height: 0;
+}
+.suite-container > input[type="checkbox"]:checked ~ .suite-tests {
+  height: auto;
+  overflow: visible;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: #eee;
+  color: #777;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.75rem;
+}
+.suite-info .suite-time.warn {
+  background-color: #d8000c;
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transform: rotate(0deg);
+}
+.suite-container > input[type="checkbox"]:checked ~ label .suite-info:before {
+  transform: rotate(180deg);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #efefef;
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: #777;
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><div class="jesthtml-content"><header><h1 id="title">Test Solution</h1></header><div id="metadata-container"><div id="timestamp">Started: 2025-03-21 11:55:42</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (1)</div><div class="summary-passed ">1 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (39)</div><div class="summary-passed ">39 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></div><div id="suite-1" class="suite-container"><input id="collapsible-0" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-0"><div class="suite-info"><div class="suite-path">/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js</div><div class="suite-time">0.331s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getAllDirectors"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getAllDirectors"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getAllDirectors"</div><div class="test-title">should return a new array, not update the original one</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getAllDirectors"</div><div class="test-title">should return a new array with the same length as the original one</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getMoviesFromDirector"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getMoviesFromDirector"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getMoviesFromDirector"</div><div class="test-title">should return a new array, not update the original one</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "getMoviesFromDirector"</div><div class="test-title">should return a new array with the movies from director</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageOfDirector"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageOfDirector"</div><div class="test-title">should return a number</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageOfDirector"</div><div class="test-title">should be different from NaN</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageOfDirector"</div><div class="test-title"> should return the average score of movies selecting only the director films. With 2 decimals! </div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should not mutate the original array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should only return the title of the movies, each value should be a string</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should return all of items when the array passed has fewer than 20 items</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should order them alphabetically.</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderAlphabetically"</div><div class="test-title">should return the top 20 after ordering them alphabetically.</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should return a new array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should return the element in a single element array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should return the new array in ascending order</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "orderByYear"</div><div class="test-title">should order movies with the same year by their title, alphabetically</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageByCategory"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageByCategory"</div><div class="test-title">should return a number</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageByCategory"</div><div class="test-title">should be different from NaN</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "moviesAverageByCategory"</div><div class="test-title"> should return the average score of movies selecting only the director films. With 2 decimals! </div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return a new array, not update the original one</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return an array of movies with duration as a number</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return an array of movies with the correct duration for a 31 minute movie</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return an array of movies with the correct duration for a 341 minute movie</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "hoursToMinutes"</div><div class="test-title">should return an array of movies with the correct duration for a 2 hour movie</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "bestFilmOfYear"</div><div class="test-title">should be declared</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "bestFilmOfYear"</div><div class="test-title">should return an array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Function "bestFilmOfYear"</div><div class="test-title">should return the best film of a year, searching in an array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div></div><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:4:11)
+    at Object.getAllDirectors (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:20:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 1 -&gt; [
+  'Frank Darabont',
+  'Francis Ford Coppola',
+  'Francis Ford Coppola',
+  'Christopher Nolan',
+  'Sidney Lumet',
+  'Steven Spielberg',
+  'Quentin Tarantino',
+  'Peter Jackson',
+  'Sergio Leone',
+  'David Fincher',
+  'Peter Jackson',
+  'Robert Zemeckis',
+  'Irvin Kershner',
+  'Christopher Nolan',
+  'Peter Jackson',
+  'Milos Forman',
+  'Martin Scorsese',
+  'Lana Wachowski',
+  'Akira Kurosawa',
+  'George Lucas',
+  'Fernando Meirelles',
+  'David Fincher',
+  'Jonathan Demme',
+  'Frank Capra',
+  'Roberto Benigni',
+  'Bryan Singer',
+  'Luc Besson',
+  'Steven Spielberg',
+  'Hayao Miyazaki',
+  'Tony Kaye',
+  'Sergio Leone',
+  'Christopher Nolan',
+  'Alfred Hitchcock',
+  'Frank Darabont',
+  'Michael Curtiz',
+  'Charles Chaplin',
+  'Olivier Nakache',
+  'Charles Chaplin',
+  'Steven Spielberg',
+  'Roman Polanski',
+  'Martin Scorsese',
+  'Alfred Hitchcock',
+  'James Cameron',
+  'Robert Zemeckis',
+  'Damien Chazelle',
+  'Ridley Scott',
+  'Christopher Nolan',
+  'Roger Allers',
+  'Christopher Nolan',
+  'Francis Ford Coppola',
+  'Ridley Scott',
+  'Charles Chaplin',
+  'Billy Wilder',
+  'Stanley Kubrick',
+  'Giuseppe Tornatore',
+  'Florian Henckel von Donnersmarck',
+  'Isao Takahata',
+  'Denis Villeneuve',
+  'Stanley Kubrick',
+  'Quentin Tarantino',
+  'Stanley Kubrick',
+  'Andrew Stanton',
+  'Sam Mendes',
+  'Christopher Nolan',
+  'Hayao Miyazaki',
+  'Chan-wook Park',
+  'James Cameron',
+  'Billy Wilder',
+  'Sergio Leone',
+  'Wolfgang Petersen',
+  'Orson Welles',
+  'Nitesh Tiwari',
+  'Alfred Hitchcock',
+  'Alfred Hitchcock',
+  'Richard Marquand',
+  'Mel Gibson',
+  'Quentin Tarantino',
+  'Fritz Lang',
+  'Darren Aronofsky',
+  'Jean-Pierre Jeunet',
+  'Aamir Khan',
+  'Stanley Kubrick',
+  'Makoto Shinkai',
+  'David Lean',
+  'Billy Wilder',
+  'Milos Forman',
+  'Michel Gondry',
+  'Martin Scorsese',
+  'Robert Mulligan',
+  'Christopher Nolan',
+  'Stanley Kubrick',
+  'Stanley Kubrick',
+  'Stanley Donen',
+  'Lee Unkrich',
+  'John Lasseter',
+  'George Roy Hill',
+  'Rajkumar Hirani',
+  'Vittorio De Sica',
+  'Quentin Tarantino',
+  'Charles Chaplin',
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:4:11)
+    at Object.getAllDirectors (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:24:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 1 -&gt; [
+  'Frank Darabont',
+  'Francis Ford Coppola',
+  'Francis Ford Coppola',
+  'Christopher Nolan',
+  'Sidney Lumet',
+  'Steven Spielberg',
+  'Quentin Tarantino',
+  'Peter Jackson',
+  'Sergio Leone',
+  'David Fincher',
+  'Peter Jackson',
+  'Robert Zemeckis',
+  'Irvin Kershner',
+  'Christopher Nolan',
+  'Peter Jackson',
+  'Milos Forman',
+  'Martin Scorsese',
+  'Lana Wachowski',
+  'Akira Kurosawa',
+  'George Lucas',
+  'Fernando Meirelles',
+  'David Fincher',
+  'Jonathan Demme',
+  'Frank Capra',
+  'Roberto Benigni',
+  'Bryan Singer',
+  'Luc Besson',
+  'Steven Spielberg',
+  'Hayao Miyazaki',
+  'Tony Kaye',
+  'Sergio Leone',
+  'Christopher Nolan',
+  'Alfred Hitchcock',
+  'Frank Darabont',
+  'Michael Curtiz',
+  'Charles Chaplin',
+  'Olivier Nakache',
+  'Charles Chaplin',
+  'Steven Spielberg',
+  'Roman Polanski',
+  'Martin Scorsese',
+  'Alfred Hitchcock',
+  'James Cameron',
+  'Robert Zemeckis',
+  'Damien Chazelle',
+  'Ridley Scott',
+  'Christopher Nolan',
+  'Roger Allers',
+  'Christopher Nolan',
+  'Francis Ford Coppola',
+  'Ridley Scott',
+  'Charles Chaplin',
+  'Billy Wilder',
+  'Stanley Kubrick',
+  'Giuseppe Tornatore',
+  'Florian Henckel von Donnersmarck',
+  'Isao Takahata',
+  'Denis Villeneuve',
+  'Stanley Kubrick',
+  'Quentin Tarantino',
+  'Stanley Kubrick',
+  'Andrew Stanton',
+  'Sam Mendes',
+  'Christopher Nolan',
+  'Hayao Miyazaki',
+  'Chan-wook Park',
+  'James Cameron',
+  'Billy Wilder',
+  'Sergio Leone',
+  'Wolfgang Petersen',
+  'Orson Welles',
+  'Nitesh Tiwari',
+  'Alfred Hitchcock',
+  'Alfred Hitchcock',
+  'Richard Marquand',
+  'Mel Gibson',
+  'Quentin Tarantino',
+  'Fritz Lang',
+  'Darren Aronofsky',
+  'Jean-Pierre Jeunet',
+  'Aamir Khan',
+  'Stanley Kubrick',
+  'Makoto Shinkai',
+  'David Lean',
+  'Billy Wilder',
+  'Milos Forman',
+  'Michel Gondry',
+  'Martin Scorsese',
+  'Robert Mulligan',
+  'Christopher Nolan',
+  'Stanley Kubrick',
+  'Stanley Kubrick',
+  'Stanley Donen',
+  'Lee Unkrich',
+  'John Lasseter',
+  'George Roy Hill',
+  'Rajkumar Hirani',
+  'Vittorio De Sica',
+  'Quentin Tarantino',
+  'Charles Chaplin',
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:4:11)
+    at Object.getAllDirectors (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:46:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 1 -&gt; [ 'Stanley Kubrick', 'Quentin Tarantino' ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:13:11)
+    at Object.getMoviesFromDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:60:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 2 -&gt; []</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:13:11)
+    at Object.getMoviesFromDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:64:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 2 -&gt; []</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:13:11)
+    at Object.getMoviesFromDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:86:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 2 -&gt; [
+  {
+    title: 'Django Unchained',
+    year: 2012,
+    director: 'Quentin Tarantino',
+    duration: '2h 45min',
+    genre: [ 'Drama', 'Western' ],
+    score: 8.4
+  }
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:28:11)
+    at Object.moviesAverageOfDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:106:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 3 -&gt; 8.328571428571427</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:28:11)
+    at Object.moviesAverageOfDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:112:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 3 -&gt; 8.328571428571427</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:28:11)
+    at Object.moviesAverageOfDirector (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:117:7)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 3 -&gt; 8.65</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:157:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; []</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:162:5)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; [ 'abc', 'xyz' ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:167:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; [ 'aab' ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:172:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; [ 'aab', 'acb', 'bab' ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:184:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; [ 'aaa', 'aab', 'abb', 'abc', 'acb' ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:37:11)
+    at Object.orderAlphabetically (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:233:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 4 -&gt; [
+  'aaa', 'aab', 'acb', 'acs',
+  'afb', 'agb', 'anc', 'apo',
+  'bab', 'bbb', 'bbt', 'bca',
+  'bvc', 'ccc', 'cdf', 'era',
+  'ert', 'frt', 'gda', 'gha'
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:63:11)
+    at Object.orderByYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:265:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">[
+  { title: 'The Kid', year: 1921 },
+  { title: 'The Gold Rush', year: 1925 },
+  { title: 'The General', year: 1926 },
+  { title: 'Metropolis', year: 1927 },
+  { title: 'Sunrise: A Song of Two Humans', year: 1927 },
+  { title: 'La passion de Jeanne d"Arc', year: 1928 },
+  { title: 'City Lights', year: 1931 },
+  { title: 'M', year: 1931 },
+  { title: 'It Happened One Night', year: 1934 },
+  { title: 'Modern Times', year: 1936 },
+  { title: 'Gone with the Wind', year: 1939 },
+  { title: 'Mr. Smith Goes to Washington', year: 1939 },
+  { title: 'The Wizard of Oz', year: 1939 },
+  { title: 'Rebecca', year: 1940 },
+  { title: 'The Grapes of Wrath', year: 1940 },
+  { title: 'The Great Dictator', year: 1940 },
+  { title: 'Citizen Kane', year: 1941 },
+  { title: 'The Maltese Falcon', year: 1941 },
+  { title: 'Casablanca', year: 1942 },
+  { title: 'Double Indemnity', year: 1944 },
+  { title: 'It"s a Wonderful Life', year: 1946 },
+  { title: 'The Best Years of Our Lives', year: 1946 },
+  { title: 'Ladri di biciclette', year: 1948 },
+  { title: 'The Treasure of the Sierra Madre', year: 1948 },
+  { title: 'The Third Man', year: 1949 },
+  { title: 'All About Eve', year: 1950 },
+  { title: 'Rashômon', year: 1950 },
+  { title: 'Sunset Blvd.', year: 1950 },
+  { title: 'Ikiru', year: 1952 },
+  { title: 'Singin" in the Rain', year: 1952 },
+  { title: 'Le salaire de la peur', year: 1953 },
+  { title: 'Tôkyô monogatari', year: 1953 },
+  { title: 'Dial M for Murder', year: 1954 },
+  { title: 'On the Waterfront', year: 1954 },
+  { title: 'Rear Window', year: 1954 },
+  { title: 'Shichinin no samurai', year: 1954 },
+  { title: 'Les diaboliques', year: 1955 },
+  { title: '12 Angry Men', year: 1957 },
+  { title: 'Det sjunde inseglet', year: 1957 },
+  { title: 'Le notti di Cabiria', year: 1957 },
+  { title: 'Paths of Glory', year: 1957 },
+  { title: 'Smultronstället', year: 1957 },
+  { title: 'The Bridge on the River Kwai', year: 1957 },
+  { title: 'Witness for the Prosecution', year: 1957 },
+  { title: 'Touch of Evil', year: 1958 },
+  { title: 'Ben-Hur', year: 1959 },
+  { title: 'Les quatre cents coups', year: 1959 },
+  { title: 'North by Northwest', year: 1959 },
+  { title: 'Some Like It Hot', year: 1959 },
+  { title: 'Psycho', year: 1960 },
+  { title: 'The Apartment', year: 1960 },
+  { title: 'Judgment at Nuremberg', year: 1961 },
+  { title: 'Yôjinbô', year: 1961 },
+  { title: 'Lawrence of Arabia', year: 1962 },
+  { title: 'To Kill a Mockingbird', year: 1962 },
+  { title: '8½', year: 1963 },
+  { title: 'The Great Escape', year: 1963 },
+  {
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    year: 1964
+  },
+  { title: 'Per qualche dollaro in più', year: 1965 },
+  { title: 'Andrey Rublev', year: 1966 },
+  { title: 'Il buono, il brutto, il cattivo', year: 1966 },
+  { title: 'La battaglia di Algeri', year: 1966 },
+  { title: 'Persona', year: 1966 },
+  { title: 'Cool Hand Luke', year: 1967 },
+  { title: '2001: A Space Odyssey', year: 1968 },
+  { title: 'C"era una volta il West', year: 1968 },
+  { title: 'Butch Cassidy and the Sundance Kid', year: 1969 },
+  { title: 'A Clockwork Orange', year: 1971 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'Paper Moon', year: 1973 },
+  { title: 'The Sting', year: 1973 },
+  { title: 'Chinatown', year: 1974 },
+  { title: 'The Godfather: Part II', year: 1974 },
+  { title: 'Barry Lyndon', year: 1975 },
+  { title: 'Dog Day Afternoon', year: 1975 },
+  { title: 'Jaws', year: 1975 },
+  { title: 'Monty Python and the Holy Grail', year: 1975 },
+  { title: 'One Flew Over the Cuckoo"s Nest', year: 1975 },
+  { title: 'Sholay', year: 1975 },
+  { title: 'Network', year: 1976 },
+  { title: 'Rocky', year: 1976 },
+  { title: 'Taxi Driver', year: 1976 },
+  { title: 'Annie Hall', year: 1977 },
+  { title: 'Star Wars', year: 1977 },
+  { title: 'The Deer Hunter', year: 1978 },
+  { title: 'Alien', year: 1979 },
+  { title: 'Apocalypse Now', year: 1979 },
+  { title: 'Life of Brian', year: 1979 },
+  { title: 'Stalker', year: 1979 },
+  { title: 'Raging Bull', year: 1980 },
+  {
+    title: 'Star Wars: Episode V - The Empire Strikes Back',
+    year: 1980
+  },
+  { title: 'The Elephant Man', year: 1980 },
+  { title: 'The Shining', year: 1980 },
+  { title: 'Das Boot', year: 1981 },
+  { title: 'Raiders of the Lost Ark', year: 1981 },
+  { title: 'Blade Runner', year: 1982 },
+  { title: 'Gandhi', year: 1982 },
+  { title: 'Hachi: A Dog"s Tale', year: 1983 },
+  { title: 'Scarface', year: 1983 },
+  { title: 'Star Wars: Episode VI - Return of the Jedi', year: 1983 },
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:63:11)
+    at Object.orderByYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:270:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">[]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:63:11)
+    at Object.orderByYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:274:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">[ { year: 1982 } ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:63:11)
+    at Object.orderByYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:279:7)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">[ { year: 1982 }, { year: 1995 }, { year: 2002 } ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:63:11)
+    at Object.orderByYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:285:7)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">[
+  { title: 'aab', year: 1982 },
+  { title: 'bac', year: 1982 },
+  { title: 'abc', year: 2002 }
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:75:11)
+    at Object.moviesAverageByCategory (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:305:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 6 -&gt; 8.35</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:75:11)
+    at Object.moviesAverageByCategory (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:308:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 6 -&gt; 8.35</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:75:11)
+    at Object.moviesAverageByCategory (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:311:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 6 -&gt; 8.35</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:322:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [
+  { duration: 142 }, { duration: 175 }, { duration: 202 }, { duration: 152 },
+  { duration: 96 },  { duration: 195 }, { duration: 154 }, { duration: 201 },
+  { duration: 182 }, { duration: 139 }, { duration: 178 }, { duration: 142 },
+  { duration: 124 }, { duration: 148 }, { duration: 179 }, { duration: 133 },
+  { duration: 146 }, { duration: 136 }, { duration: 207 }, { duration: 121 },
+  { duration: 130 }, { duration: 127 }, { duration: 118 }, { duration: 130 },
+  { duration: 116 }, { duration: 106 }, { duration: 110 }, { duration: 169 },
+  { duration: 125 }, { duration: 119 }, { duration: 164 }, { duration: 169 },
+  { duration: 109 }, { duration: 189 }, { duration: 102 }, { duration: 87 },
+  { duration: 112 }, { duration: 87 },  { duration: 115 }, { duration: 150 },
+  { duration: 151 }, { duration: 112 }, { duration: 137 }, { duration: 116 },
+  { duration: 107 }, { duration: 155 }, { duration: 130 }, { duration: 88 },
+  { duration: 113 }, { duration: 147 }, { duration: 117 }, { duration: 125 },
+  { duration: 110 }, { duration: 95 },  { duration: 155 }, { duration: 137 },
+  { duration: 89 },  { duration: 164 }, { duration: 88 },  { duration: 165 },
+  { duration: 146 }, { duration: 98 },  { duration: 122 }, { duration: 164 },
+  { duration: 134 }, { duration: 120 }, { duration: 137 }, { duration: 116 },
+  { duration: 229 }, { duration: 149 }, { duration: 119 }, { duration: 161 },
+  { duration: 128 }, { duration: 136 }, { duration: 131 }, { duration: 178 },
+  { duration: 99 },  { duration: 117 }, { duration: 102 }, { duration: 122 },
+  { duration: 165 }, { duration: 136 }, { duration: 106 }, { duration: 216 },
+  { duration: 107 }, { duration: 160 }, { duration: 108 }, { duration: 113 },
+  { duration: 129 }, { duration: 106 }, { duration: 116 }, { duration: 149 },
+  { duration: 103 }, { duration: 103 }, { duration: 81 },  { duration: 129 },
+  { duration: 170 }, { duration: 89 },  { duration: 153 }, { duration: 68 },
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:326:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [
+  { duration: 142 }, { duration: 175 }, { duration: 202 }, { duration: 152 },
+  { duration: 96 },  { duration: 195 }, { duration: 154 }, { duration: 201 },
+  { duration: 182 }, { duration: 139 }, { duration: 178 }, { duration: 142 },
+  { duration: 124 }, { duration: 148 }, { duration: 179 }, { duration: 133 },
+  { duration: 146 }, { duration: 136 }, { duration: 207 }, { duration: 121 },
+  { duration: 130 }, { duration: 127 }, { duration: 118 }, { duration: 130 },
+  { duration: 116 }, { duration: 106 }, { duration: 110 }, { duration: 169 },
+  { duration: 125 }, { duration: 119 }, { duration: 164 }, { duration: 169 },
+  { duration: 109 }, { duration: 189 }, { duration: 102 }, { duration: 87 },
+  { duration: 112 }, { duration: 87 },  { duration: 115 }, { duration: 150 },
+  { duration: 151 }, { duration: 112 }, { duration: 137 }, { duration: 116 },
+  { duration: 107 }, { duration: 155 }, { duration: 130 }, { duration: 88 },
+  { duration: 113 }, { duration: 147 }, { duration: 117 }, { duration: 125 },
+  { duration: 110 }, { duration: 95 },  { duration: 155 }, { duration: 137 },
+  { duration: 89 },  { duration: 164 }, { duration: 88 },  { duration: 165 },
+  { duration: 146 }, { duration: 98 },  { duration: 122 }, { duration: 164 },
+  { duration: 134 }, { duration: 120 }, { duration: 137 }, { duration: 116 },
+  { duration: 229 }, { duration: 149 }, { duration: 119 }, { duration: 161 },
+  { duration: 128 }, { duration: 136 }, { duration: 131 }, { duration: 178 },
+  { duration: 99 },  { duration: 117 }, { duration: 102 }, { duration: 122 },
+  { duration: 165 }, { duration: 136 }, { duration: 106 }, { duration: 216 },
+  { duration: 107 }, { duration: 160 }, { duration: 108 }, { duration: 113 },
+  { duration: 129 }, { duration: 106 }, { duration: 116 }, { duration: 149 },
+  { duration: 103 }, { duration: 103 }, { duration: 81 },  { duration: 129 },
+  { duration: 170 }, { duration: 89 },  { duration: 153 }, { duration: 68 },
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:330:19)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [
+  { duration: 142 }, { duration: 175 }, { duration: 202 }, { duration: 152 },
+  { duration: 96 },  { duration: 195 }, { duration: 154 }, { duration: 201 },
+  { duration: 182 }, { duration: 139 }, { duration: 178 }, { duration: 142 },
+  { duration: 124 }, { duration: 148 }, { duration: 179 }, { duration: 133 },
+  { duration: 146 }, { duration: 136 }, { duration: 207 }, { duration: 121 },
+  { duration: 130 }, { duration: 127 }, { duration: 118 }, { duration: 130 },
+  { duration: 116 }, { duration: 106 }, { duration: 110 }, { duration: 169 },
+  { duration: 125 }, { duration: 119 }, { duration: 164 }, { duration: 169 },
+  { duration: 109 }, { duration: 189 }, { duration: 102 }, { duration: 87 },
+  { duration: 112 }, { duration: 87 },  { duration: 115 }, { duration: 150 },
+  { duration: 151 }, { duration: 112 }, { duration: 137 }, { duration: 116 },
+  { duration: 107 }, { duration: 155 }, { duration: 130 }, { duration: 88 },
+  { duration: 113 }, { duration: 147 }, { duration: 117 }, { duration: 125 },
+  { duration: 110 }, { duration: 95 },  { duration: 155 }, { duration: 137 },
+  { duration: 89 },  { duration: 164 }, { duration: 88 },  { duration: 165 },
+  { duration: 146 }, { duration: 98 },  { duration: 122 }, { duration: 164 },
+  { duration: 134 }, { duration: 120 }, { duration: 137 }, { duration: 116 },
+  { duration: 229 }, { duration: 149 }, { duration: 119 }, { duration: 161 },
+  { duration: 128 }, { duration: 136 }, { duration: 131 }, { duration: 178 },
+  { duration: 99 },  { duration: 117 }, { duration: 102 }, { duration: 122 },
+  { duration: 165 }, { duration: 136 }, { duration: 106 }, { duration: 216 },
+  { duration: 107 }, { duration: 160 }, { duration: 108 }, { duration: 113 },
+  { duration: 129 }, { duration: 106 }, { duration: 116 }, { duration: 149 },
+  { duration: 103 }, { duration: 103 }, { duration: 81 },  { duration: 129 },
+  { duration: 170 }, { duration: 89 },  { duration: 153 }, { duration: 68 },
+  ... 150 more items
+]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:335:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [ { duration: 31 } ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:340:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [ { duration: 341 } ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:92:11)
+    at Object.hoursToMinutes (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:345:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 7 -&gt; [ { duration: 120 } ]</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:102:11)
+    at Object.bestFilmOfYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:356:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 8 -&gt; {
+  title: 'Fight Club',
+  year: 1999,
+  director: 'David Fincher',
+  duration: '2h 19min',
+  genre: [ 'Drama' ],
+  score: 8.8
+}</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (/Users/leo/Documents/IT-Academy/IT-Academy-testing/src/films.js:102:11)
+    at Object.bestFilmOfYear (/Users/leo/Documents/IT-Academy/IT-Academy-testing/tests/films.spec.js:386:12)
+    at Promise.then.completed (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/leo/Documents/IT-Academy/IT-Academy-testing/node_modules/jest-runner/build/testWorker.js:106:12)</pre><pre class="suite-consolelog-item-message">EXERCICE 8 -&gt; {
+  title: 'Film2',
+  year: 1957,
+  director: 'Stanley Kubrick',
+  duration: '1h 28min',
+  genre: [ 'Drama', 'War' ],
+  score: 8.4
+}</pre></div></div></div></div></body></html>
