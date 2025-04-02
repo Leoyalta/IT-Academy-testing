@@ -20,7 +20,7 @@ Instalación y Ejecución
 
    - cd IT-Academy-testing
 
-3. Abre el archivo Abre el archivo index.html en tu navegador preferido parva ver los resultados de los tests.
+3. Abre el archivo Abre el archivo test-results.html en tu navegador preferido parva ver los resultados de los tests.
 
 ## Funciones
 
